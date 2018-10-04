@@ -58,9 +58,23 @@ class LaughData
 
   # --- Make Comedians ---
 
+    def self.make_comedians(input)
+      hashes = assess_data(input)
+      return hashes if hashes.class == String
+      "TESTING"
+      # seed_comedians(hashes)
+    end
 
 
-
+    def self.assess_data(data)
+      if data.class == Array && data.first.class == Hash
+        return data
+      elsif data.class == String && data.chars.last(3).join == "csv"
+        hash = format_data(data)
+      else
+        "Input Error"
+      end
+    end
 
 
   # --- Make Specials ---
@@ -69,5 +83,12 @@ class LaughData
 end
 
 comedian_path = 'db/data/comedians.csv'
-comedians = LaughData.format_data(comedian_path)
+# comedian_data = LaughData.format_data(comedian_path)
+# p comedian_data
+comedians = LaughData.make_comedians(comedian_path)
+p comedians
+# -- these work too --
+# comedians = LaughData.make_comedians(comedian_data)
+# p comedians
+# comedians = LaughData.make_comedians(3)
 # p comedians
