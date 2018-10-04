@@ -6,7 +6,13 @@ class Comedian < ActiveRecord::Base
 
   has_many :specials
 
+  def self.assess_params(params)
+    return all if params.empty? == true
+    return filter_by_age(params[:age]) if params[:age]
+  end
+
   def self.average_age
+
     average(:age)
   end
 
@@ -17,5 +23,7 @@ class Comedian < ActiveRecord::Base
   def self.filter_by_age(age)
     all.select { |comic| comic.age == age.to_i }
   end
+
+
 
 end
