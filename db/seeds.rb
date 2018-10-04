@@ -4,8 +4,11 @@
 require 'pry'
 
 require 'CSV'
+# require 'activerecord-import/base'
+# require 'sinatra/activerecord'
 
-# require_relative './data/comedians.csv'
+
+require_relative '../app/models/comedian.rb'
 
 class LaughData
 
@@ -35,4 +38,6 @@ end
 
 comedians_path = '/Users/kt/turing/2mod/projects/LaughTracks/db/data/comedians.csv'
 comedians_list = LaughData.format_data(comedians_path)
-p comedians_list
+comedians = comedians_list.map { |hash| Comedian.create(hash) }
+
+p comedian.all
