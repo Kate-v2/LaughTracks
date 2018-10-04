@@ -20,7 +20,7 @@ class LaughData
     array = rows.map { |row| make_row(row, headers) }
   end
 
-  private
+  private   # wish this worked...
 
   def self.make_row(row, headers)
     hash = {}
@@ -30,6 +30,7 @@ class LaughData
   end
 
 end
+
 
 
 comedians_path = '/Users/kt/turing/2mod/projects/LaughTracks/db/data/comedians.csv'
