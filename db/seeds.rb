@@ -49,6 +49,8 @@ class LaughData
 
   def self.make_row(header, row)
     hash = {}
+    ct = row.count
+    return p "TOO MANY #{ct} #{row}" if row.count > 3
     row.each.with_index { |data, index|
       key = header[index].to_sym
       hash[key] = data
@@ -56,7 +58,7 @@ class LaughData
   end
 
 
-  # --- General Method ---
+  # --- General Methods ---
 
   def self.assess_data(data)
     if data.class == Array && data.first.class == Hash
@@ -68,32 +70,53 @@ class LaughData
     end
   end
 
+  def self.seed_models(data, model)
+    data.map { |set|
+      make_model(set, model)
+     }
+  end
+
+  def self.make_model(set, model)
+    if model == :comedian
+      Comedian.create(set)
+    elsif model == :special
+      Special.create(set)
+    end
+  end
+
 
   # --- Make Comedians ---
 
     def self.make_comedians(input)
       hashes = assess_data(input)
       return hashes if hashes.class == String
-      "TESTING"
-      # seed_comedians(hashes)
+      seed_models(hashes, :comedian)
     end
-
-
-
 
 
   # --- Make Specials ---
 
+    def self.make_specials(input)
+      hashes = assess_data(input)
+      return hashes if hashes.class == String
+      seed_models(hashes, :special)
+    end
+
+
 
 end
 
-comedian_path = 'db/data/comedians.csv'
-# comedian_data = LaughData.format_data(comedian_path)
+comedians_path = 'db/data/comedians.csv'
+# comedian_data = LaughData.format_data(comedians_path)
 # p comedian_data
-comedians = LaughData.make_comedians(comedian_path)
+comedians = LaughData.make_comedians(comedians_path)
 p comedians
 # -- these work too --
 # comedians = LaughData.make_comedians(comedian_data)
 # p comedians
 # comedians = LaughData.make_comedians(3)
 # p comedians
+
+specials_path = 'db/data/specials.csv'
+specials = LaughData.make_specials(specials_path)
+p specials
