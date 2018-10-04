@@ -11,9 +11,12 @@ class Comedian < ActiveRecord::Base
     return filter_by_age(params[:age]) if params[:age]
   end
 
-  def self.average_age
-
-    average(:age)
+  def self.average_age(params={})
+    if params[:age]
+      params[:age].to_i
+    else
+      average(:age)
+    end
   end
 
   def self.cities
