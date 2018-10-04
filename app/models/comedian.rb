@@ -10,4 +10,8 @@ class Comedian < ActiveRecord::Base
     average(:age)
   end
 
+  def self.cities
+    Comedian.pluck(:hometown).uniq
+  end
+
 end

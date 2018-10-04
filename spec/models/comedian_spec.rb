@@ -30,6 +30,17 @@ RSpec.describe Comedian do
         expect(average).to eq(2)
       end
 
+      it 'should aggregate a list of all uniq cities' do
+        city1 = "NYC"; city2 = "JC"
+        comic1 = Comedian.create(name: 'One', age: 1, hometown:city1)
+        comic2 = Comedian.create(name: 'Two', age: 3, hometown:city2)
+        comic3 = Comedian.create(name: 'Three', age: 4, hometown:city2)
+
+        list = Comedian.cities
+        expected = [city1, city2]
+        expect(list).to eq(expected)
+      end
+
     end
   end
 
