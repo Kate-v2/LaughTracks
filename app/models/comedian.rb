@@ -6,12 +6,12 @@ class Comedian < ActiveRecord::Base
 
   has_many :specials
 
-  def self.assess_params(params)
+  def self.assess_params(params = {})
     return all if params.empty? == true
     return filter_by_age(params[:age]) if params[:age]
   end
 
-  def self.average_age(params)
+  def self.average_age(params = {})
     if params[:age]
       params[:age].to_i
     else
@@ -19,7 +19,7 @@ class Comedian < ActiveRecord::Base
     end
   end
 
-  def self.cities(params)
+  def self.cities(params = {})
     pluck(:hometown).uniq
   end
 
