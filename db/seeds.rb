@@ -56,6 +56,19 @@ class LaughData
   end
 
 
+  # --- General Method ---
+
+  def self.assess_data(data)
+    if data.class == Array && data.first.class == Hash
+      return data
+    elsif data.class == String && data.chars.last(3).join == "csv"
+      hash = format_data(data)
+    else
+      "Input Error"
+    end
+  end
+
+
   # --- Make Comedians ---
 
     def self.make_comedians(input)
@@ -66,15 +79,7 @@ class LaughData
     end
 
 
-    def self.assess_data(data)
-      if data.class == Array && data.first.class == Hash
-        return data
-      elsif data.class == String && data.chars.last(3).join == "csv"
-        hash = format_data(data)
-      else
-        "Input Error"
-      end
-    end
+
 
 
   # --- Make Specials ---
