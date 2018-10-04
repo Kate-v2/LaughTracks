@@ -1,6 +1,9 @@
 
 
-
+<% comedians.each do |comedian| %>
 <ul>
-  <li> </li>
+  <li><%= comedian.name %></li>
+  <li><%= comedian.age %></li>
+  <li><%= comedian.hometown %></li>
 </ul>
+<%end%>
