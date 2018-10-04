@@ -11,7 +11,11 @@ class Comedian < ActiveRecord::Base
   end
 
   def self.cities
-    Comedian.pluck(:hometown).uniq
+    pluck(:hometown).uniq
+  end
+
+  def self.filter_by_age(age)
+    all.select { |comic| comic.age == age.to_i }
   end
 
 end

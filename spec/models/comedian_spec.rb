@@ -41,6 +41,24 @@ RSpec.describe Comedian do
         expect(list).to eq(expected)
       end
 
+      describe 'Filtering' do
+
+        it 'should return a collection filtered by a single age' do
+          comic1 = Comedian.create(name: 'One', age: 34)
+          comic2 = Comedian.create(name: 'Two', age: 34)
+          comic3 = Comedian.create(name: 'Three', age: 20)
+          comic4 = Comedian.create(name: 'Four', age: 23)
+
+          age = "34"
+          expected = [comic1, comic2]
+          list = Comedian.filter_by_age(age)
+          expect(list).to eq(expected)
+        end
+
+
+      end
+
+
     end
   end
 

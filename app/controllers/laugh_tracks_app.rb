@@ -3,13 +3,15 @@
 
 class LaughTracksApp < Sinatra::Base
 
-  get '/comedians' do
-    comedians = Comedian.all
-    erb :"comedians/index", locals: { comedians: comedians }
-    # Then I also see a list of each comedian's TV specials' names
+  def assess_params(params)
+    return Comedian.all if params.empty? == true
+    return Comedian.filter_by_age(params[:age]) if params[:age]
   end
 
-
+  get '/comedians' do
+    comedians = assess_params(params)
+    erb :"comedians/index", locals: { comedians: comedians }
+  end
 
 
 end
