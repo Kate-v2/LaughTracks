@@ -1,0 +1,20 @@
+
+
+<% comedians.each do |comedian| %>
+<ul>
+  <li><%= comedian.name %></li>
+  <li><%= comedian.age %></li>
+  <li><%= comedian.hometown %></li>
+  <% if comedian.specials %>
+    <% comedian.specials.each do |special| %>
+      <span>
+        <img src='<%=special.image%>' alt='<%=special.name%>' >
+        <div class="details">
+          <p class="Title"><%=special.name%></p>
+          <p class="runtime"><%=special.runtime%> minutes</p>
+        </div>
+      </span>
+    <% end %>
+  <%end%>
+</ul>
+<%end%>
