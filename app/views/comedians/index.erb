@@ -5,8 +5,16 @@
   <li><%= comedian.name %></li>
   <li><%= comedian.age %></li>
   <li><%= comedian.hometown %></li>
-  <% if comedian.specials %>
-    <li><%= comedian.specials %></li>
+  <% if comedian.specials != nil %>
+    <% comedians.specials.each do |special| %>
+      <span>
+        <img src='<%=special.image%>' alt='<%=specail.name%>' >
+        <div class="details">
+          <p class="Title">Title: <%=special.name%></p>
+          <p class="runtime"><%=special.runtime%> minutes</p>
+        </div>
+      </span>
+    <% end %>
   <%end%>
 </ul>
 <%end%>
