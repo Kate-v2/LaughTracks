@@ -1,9 +1,9 @@
 
 
 
-lass Special < ActiveRecord::Base
+class Special < ActiveRecord::Base
 
-  validate_presence_of :name, # :runtime #, :image
+  validates_presence_of :name #, :runtime #, :image
 
   belongs_to :comedian
 
