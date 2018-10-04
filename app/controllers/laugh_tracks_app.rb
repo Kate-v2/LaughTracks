@@ -1,5 +1,5 @@
 
-
+# These all need tests when we learn how to do that
 
 class LaughTracksApp < Sinatra::Base
 
@@ -7,6 +7,8 @@ class LaughTracksApp < Sinatra::Base
     comedians = Comedian.all
     erb :"comedians/index", locals: { comedians: comedians }
   end
+
+
 
 
 end
