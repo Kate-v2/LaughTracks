@@ -23,8 +23,6 @@ class LaughData
 
   def self.make_row(header, row)
     hash = {}
-    # ct = row.count
-    # return p "TOO MANY #{ct} #{row}" if row.count > 3
     row.each.with_index { |data, index|
       key = header[index].to_sym
       hash[key] = data
