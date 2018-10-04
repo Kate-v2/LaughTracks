@@ -49,8 +49,8 @@ class LaughData
 
   def self.make_row(header, row)
     hash = {}
-    ct = row.count
-    return p "TOO MANY #{ct} #{row}" if row.count > 3
+    # ct = row.count
+    # return p "TOO MANY #{ct} #{row}" if row.count > 3
     row.each.with_index { |data, index|
       key = header[index].to_sym
       hash[key] = data
@@ -71,37 +71,60 @@ class LaughData
   end
 
   def self.seed_models(data, model)
-    data.map { |set|
-      make_model(set, model)
-     }
+    data.map { |set| make_model(set, model) }
   end
 
   def self.make_model(set, model)
-    if model == :comedian
+    case model
+    when :comedian
       Comedian.create(set)
-    elsif model == :special
+    when :special
       Special.create(set)
+    # else
+    #   "ERROR"
     end
   end
-
 
   # --- Make Comedians ---
 
     def self.make_comedians(input)
-      hashes = assess_data(input)
-      return hashes if hashes.class == String
-      seed_models(hashes, :comedian)
+      data = assess_data(input)
+      return data if data.class == String
+      seed_models(data, :comedian)
     end
 
 
   # --- Make Specials ---
 
     def self.make_specials(input)
-      hashes = assess_data(input)
-      return hashes if hashes.class == String
-      seed_models(hashes, :special)
+      data = assess_data(input)
+      return data if data.class == String   # return Error message
+      make_many_via_link(data, :special, :comedian) #column name to link data on as a hash key
     end
 
+    def self.make_many_via_link(data, many_model, link)
+      data.map { |set| make_model_via_link(set, many_model, link) }
+    end
+
+
+    def self.make_model_via_link(data, model, link)
+      key = data.delete(link).to_sym
+      if model == :special
+        new_hash = { key => make_model(data, model) }
+      # else
+      #   "Unknown Model as a belongs_to"
+      end
+    end
+
+    def self.link_models_via_keys(data, owner, many, collection)
+      pair_new_objects_with_key(data, many)
+    end
+
+    def self.pair_new_objects_with_key(data, model)
+      if model == :special
+        special = Special.create(data.values.first)
+      end
+    end
 
 
 end
@@ -110,6 +133,7 @@ comedians_path = 'db/data/comedians.csv'
 # comedian_data = LaughData.format_data(comedians_path)
 # p comedian_data
 comedians = LaughData.make_comedians(comedians_path)
+puts "  -------------------------   Comedians   -------------------------   "
 p comedians
 # -- these work too --
 # comedians = LaughData.make_comedians(comedian_data)
@@ -119,4 +143,5 @@ p comedians
 
 specials_path = 'db/data/specials.csv'
 specials = LaughData.make_specials(specials_path)
+puts "  -------------------------   Specials   -------------------------   "
 p specials
