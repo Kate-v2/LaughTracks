@@ -5,5 +5,8 @@
   <li><%= comedian.name %></li>
   <li><%= comedian.age %></li>
   <li><%= comedian.hometown %></li>
+  <% if comedian.specials %>
+    <li><%= comedian.specials %></li>
+  <%end%>
 </ul>
 <%end%>

@@ -6,7 +6,6 @@ class CreateComedians < ActiveRecord::Migration[5.2]
       table.text    :name
       table.integer :age
       table.text    :hometown
-
       # table.timestamps null: true
     end
   end
