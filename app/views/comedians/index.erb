@@ -5,10 +5,10 @@
   <li><%= comedian.name %></li>
   <li><%= comedian.age %></li>
   <li><%= comedian.hometown %></li>
-  <% if comedian.specials != nil %>
-    <% comedians.specials.each do |special| %>
+  <% if comedian.specials %>
+    <% comedian.specials.each do |special| %>
       <span>
-        <img src='<%=special.image%>' alt='<%=specail.name%>' >
+        <img src='<%=special.image%>' alt='<%=special.name%>' >
         <div class="details">
           <p class="Title">Title: <%=special.name%></p>
           <p class="runtime"><%=special.runtime%> minutes</p>
