@@ -14,30 +14,46 @@ class Comedian < ActiveRecord::Base
   def self.average_age(params = {})
     comics = assess_params(params)
     comics.average(:age)
-    # if age = params[:age]
-    #   filtered = filter_by_age(age)
-    #   filtered.average(:age)
-    #   # @age_filtered.average(:age)
-    # else
-    #   average(:age)
-    # end
   end
 
   def self.cities(params = {})
-    # pluck(:hometown).uniq
-    distinct.pluck(:hometown)
+    comics = assess_params(params)
+    total_specials(params)
+    comics.distinct.pluck(:hometown)
+  end
+
+  def self.total_specials(params = {})
+    comics = assess_params(params)
+    # comics.pluck(:specials).count
+    # comics.specials.count
+    # comics.pluck(:specials, :each).count
+    # comics.pluck(:each, :specials).count
+    # comics.pluck(:specials, each: true).count
+    # binding.pry
+    # comics.count(has_many: :specials )
+    # Comedian.specials
+    find_specials(params)
+  end
+
+# :nested_attributes_options,
+# :nested_attributes_options=
+# :reflect_on_all_aggregations
+# :reflect_on_all_associations,
+
+  def self.find_specials(params = {})
+    comics = assess_params(params)
+    comic_ids = comics.select(:id)
+    specials = Special.where(comedian_id: comic_ids )
+    binding.pry
   end
 
 
   # --- Filter ----
 
   def self.filter_by_age(age)
-    # all.select { |comic| comic.age == age.to_i }
-    # ^^^ This is ruby
-    # select(:age == age)  ?
-    # all.where(:age == age)
-    @age_filtered = where({age: age})
+    where({age: age})
   end
+
 
 
 
