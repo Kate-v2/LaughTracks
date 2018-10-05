@@ -1,4 +1,5 @@
 
+require_relative 'special'
 
 class Comedian < ActiveRecord::Base
 
@@ -23,28 +24,14 @@ class Comedian < ActiveRecord::Base
   end
 
   def self.total_specials(params = {})
-    comics = assess_params(params)
-    # comics.pluck(:specials).count
-    # comics.specials.count
-    # comics.pluck(:specials, :each).count
-    # comics.pluck(:each, :specials).count
-    # comics.pluck(:specials, each: true).count
-    # binding.pry
-    # comics.count(has_many: :specials )
-    # Comedian.specials
-    find_specials(params)
+    find_specials(params).count
   end
-
-# :nested_attributes_options,
-# :nested_attributes_options=
-# :reflect_on_all_aggregations
-# :reflect_on_all_associations,
 
   def self.find_specials(params = {})
     comics = assess_params(params)
-    comic_ids = comics.select(:id)
+    comic_ids = comics.pluck(:id)
     specials = Special.where(comedian_id: comic_ids )
-    binding.pry
+
   end
 
 
