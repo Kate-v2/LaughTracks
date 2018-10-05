@@ -1,6 +1,4 @@
 
-require_relative 'special'
-
 class Comedian < ActiveRecord::Base
 
   validates_presence_of :name, :age #, :hometown
@@ -31,7 +29,6 @@ class Comedian < ActiveRecord::Base
     comics = assess_params(params)
     comic_ids = comics.pluck(:id)
     specials = Special.where(comedian_id: comic_ids )
-
   end
 
 

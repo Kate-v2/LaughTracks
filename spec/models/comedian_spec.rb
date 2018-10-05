@@ -36,15 +36,18 @@ RSpec.describe Comedian do
         empty = {}
         expect(params).to eq(empty)
         comedians = Comedian.assess_params
-        # HERE
+        expect(comedians).to eq(Comedian.all)
       end
 
       it 'should assess when there are query params and return all comedians' do
-        vist '/comedians?age=34'
+        visit '/comedians?age=34'
         hash = {age: 34}
         expect(params).to eq(hash)
         comedians = Comedian.assess_params
-        # HERE
+        expect(list.class).to eq(Array)
+        expect(list.count).to eq(2)
+        expect(list.include?(@comic1)).to eq(true)
+        expect(list.include?(@comic2)).to eq(true)
       end
 
       it 'should average the age of all comedians' do
@@ -52,7 +55,7 @@ RSpec.describe Comedian do
         expect(average).to eq(27)
       end
 
-      it 'should aggregate a list of all uniq cities' do
+      it 'should aggregate a list of all unique cities' do
         list = Comedian.cities
         expect(list.class).to eq(Array)
         expect(list.count).to eq(2)
