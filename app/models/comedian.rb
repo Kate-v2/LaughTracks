@@ -17,12 +17,7 @@ class Comedian < ActiveRecord::Base
 
   def self.cities(params = {})
     comics = assess_params(params)
-    total_specials(params)
     comics.distinct.pluck(:hometown)
-  end
-
-  def self.total_specials(params = {})
-    find_specials(params).count
   end
 
   def self.find_specials(params = {})
@@ -31,14 +26,15 @@ class Comedian < ActiveRecord::Base
     specials = Special.where(comedian_id: comic_ids )
   end
 
+  def self.total_specials(params = {})
+    find_specials(params).count
+  end
+
 
   # --- Filter ----
 
   def self.filter_by_age(age)
     where({age: age})
   end
-
-
-
 
 end
