@@ -18,7 +18,6 @@ RSpec.describe Comedian do
     end
   end
 
-
   describe 'Class Methods' do
 
     describe 'Statistics' do
@@ -31,36 +30,54 @@ RSpec.describe Comedian do
         @comic4 = Comedian.create(name: 'Four',  age: 20, hometown:@city2)
       end
 
-      it 'should assess when there are no query params and return all comedians' do
-        visit '/comedians'
-        empty = {}
-        expect(params).to eq(empty)
-        comedians = Comedian.assess_params
-        expect(comedians).to eq(Comedian.all)
+      describe 'Assess Query Parameters' do
+
+        it 'should return all comedians when not queried' do
+          no_query = {}
+          list = Comedian.assess_params(no_query)
+          expect(list).to eq(Comedian.all)
+          expect(list.count).to eq(4)
+          expect(list.include?(@comic1)).to eq(true)
+          expect(list.include?(@comic2)).to eq(true)
+          expect(list.include?(@comic3)).to eq(true)
+          expect(list.include?(@comic4)).to eq(true)
+        end
+
+        it 'should return a subset of comedians when queried' do
+          query = {age: 34}
+          list = Comedian.assess_params(query)
+          expect(list.count).to eq(2)
+          expect(list.include?(@comic1)).to eq(true)
+          expect(list.include?(@comic2)).to eq(true)
+          expect(list.include?(@comic3)).to eq(false)
+          expect(list.include?(@comic4)).to eq(false)
+        end
       end
 
-      it 'should assess when there are query params and return all comedians' do
-        visit '/comedians?age=34'
-        hash = {age: 34}
-        expect(params).to eq(hash)
-        comedians = Comedian.assess_params
-        expect(list.class).to eq(Array)
-        expect(list.count).to eq(2)
-        expect(list.include?(@comic1)).to eq(true)
-        expect(list.include?(@comic2)).to eq(true)
-      end
-
-      it 'should average the age of all comedians' do
-        average = Comedian.average_age
+      it 'should average the age of comedians' do
+        all_comedians = Comedian.assess_params({})
+        average = all_comedians.average_age
         expect(average).to eq(27)
+
+        some_comedians = Comedian.assess_params({age: 34})
+        average = some_comedians.average_age
+        expect(average).to eq(34)
       end
 
-      it 'should aggregate a list of all unique cities' do
-        list = Comedian.cities
-        expect(list.class).to eq(Array)
-        expect(list.count).to eq(2)
-        expect(list.include?(@city1)).to eq(true)
-        expect(list.include?(@city2)).to eq(true)
+      it 'should aggregate a list unique cities from comedians' do
+        all_comedians = Comedian.assess_params({})
+        cities        = all_comedians.cities
+        expect(cities.class).to eq(Array)
+        expect(cities.count).to eq(2)
+        expect(cities.include?(@city1)).to eq(true)
+        expect(cities.include?(@city2)).to eq(true)
+
+        some_comedians = Comedian.assess_params({age: 20})
+        cities        = some_comedians.cities
+        expect(cities.class).to eq(Array)
+        expect(cities.count).to eq(1)
+        expect(cities.include?(@city1)).to eq(false)
+        expect(cities.include?(@city2)).to eq(true)
       end
 
       describe 'should interact with specials through Comedian' do
@@ -71,7 +88,7 @@ RSpec.describe Comedian do
 
 
 
-      describe 'Filtering' do
+      describe 'Filter' do
 
         it 'should return a collection filtered by a single age' do
           age = "34"
