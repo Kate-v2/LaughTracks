@@ -2,7 +2,7 @@
 class LaughTracksApp < Sinatra::Base
 
   get '/' do
-    comedians = Comedian.assess_params(params)
+    comedian = Comedian.assess_params(params)
     redirect "comedians/#{comedian.id}" if params[:name]
     erb :welcome
   end
