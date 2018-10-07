@@ -24,14 +24,14 @@ class LaughTracksApp < Sinatra::Base
     redirect "comedians/#{comedian.id}"
   end
 
-  get 'comedians/:id' do
-    comedian = Comedian.find(params[:id])
-    specials.comedian.find_specials
-    erb :"comedians/comedian",
-        locals: { comedian: comedian,
+  # This is broken
+  get "comedians/:id" do
+    comedians = Comedian.find(params[:id])
+    specials  = comedian.find_specials
+    # erb :"comedians/comedian",
+    erb :"comedians/index",
+        locals: { comedian: comedians,
                   specials: specials  }
   end
-
-
 
 end
