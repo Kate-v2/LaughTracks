@@ -10,7 +10,8 @@ class Comedian < ActiveRecord::Base
 
   def self.assess_params(params = {})
     return all if params.empty? == true
-    return filter_by_age(params[:age]) if params[:age]
+    return filter_by_age(params[:age])   if params[:age]
+    return filter_by_name(params[:name]) if params[:name]
   end
 
   def self.find_specials(params = {})
@@ -24,6 +25,11 @@ class Comedian < ActiveRecord::Base
 
   def self.filter_by_age(age)
     where({age: age})
+  end
+
+  # TO DO - Test me
+  def self.filter_by_name(name)
+    find_by_name(name)
   end
 
 
