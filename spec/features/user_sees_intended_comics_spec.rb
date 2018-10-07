@@ -19,44 +19,53 @@ RSpec.describe 'Viewing Comedians' do
     @comic3.specials << @special4
   end
 
-  describe 'all comedians' do
-
+  describe 'Display list of comedians' do
     it 'should display all comics on the page' do
       count = Comedian.all.count
       visit '/comedians'
       list = all('.comedian')
       expect(list.count).to eq(count)
     end
-
-  end
-
-  describe 'filtered comedians' do
-
-    it 'should display a subset of comics on the page' do
+    it 'should display only filtered comics on the page' do
       count = 2
       visit '/comedians?age=34'
       list = all('.comedian')
       expect(list.count).to eq(count)
     end
-
   end
 
   describe 'Statistics' do
 
-    describe 'Average the age of all comics on the page' do
+    describe 'Count Total Specials of comics on the page' do
+      it 'when all comics are present' do
+        visit '/comedians'
+        average = ((10 + 20 + 30 + 40) / 4).round(2)
+        expect(page).to have_content("Average TV Special Run Time: #{average}")
+      end
+      it 'when some comics are preset' do
+        visit '/comedians?age=34'
+        average = ((10 + 20) / 2).round(2)
+        expect(page).to have_content("Average TV Special Run Time: #{average}")
+      end
+    end
 
+    describe 'Count Total Specials of comics on the page' do
+      it 'when all comics are present' do
+        visit '/comedians'
+        expect(page).to have_content("Total TV Specials: 4")
+      end
+      it 'when some comics are preset' do
+        visit '/comedians?age=34'
+        expect(page).to have_content("Total TV Specials: 2")
+      end
+    end
+
+    describe 'Average the age of all comics on the page' do
       it 'when all comics are present' do
         visit '/comedians'
         average = ((34 + 34 + 20 + 20) / 4).round
-        # found   = all('#average_age')
-        # binding.pry
-        # expect(found).to have_content("#{average}")
-        # expect(page).to have_content("#{average}")
-        # page.should have_selector('#average_age', text: '#{average}')
-        # expect(page).to have_selector('#average_age', text: '#{average}')
         expect(page).to have_content("Average Age: #{average}")
       end
-
       it 'when some comics are preset' do
         visit '/comedians?age=34'
         average = 34
@@ -64,8 +73,19 @@ RSpec.describe 'Viewing Comedians' do
       end
     end
 
-
-
-
+    describe 'Display unique cities of comics on the page' do
+      it 'when all comics are present' do
+        visit '/comedians'
+        expect(page).to have_content("Cities: #{@city2} #{@city1}")
+      end
+      it 'when some comics are present' do
+        visit '/comedians?age=20'
+        expect(page).to_not have_content("Cities: #{@city2} #{@city1}")
+        expect(page).to have_content("Cities: #{@city2}")
+        expect(page).to_not have_content("#{@city1}")
+      end
+    end
   end
+
+
 end
