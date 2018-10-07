@@ -14,23 +14,23 @@
 
 
 <% comedians.each do |comedian| %>
-<span class="comedian">
+<span class="comedian" id='<%=comedian.id%>'>
   <h2><%= comedian.name %></h2>
-  <ul>
-    <li><%= comedian.age %></li>
-    <li><%= comedian.hometown %></li>
+    <p>Age: <%= comedian.age %></p>
+    <p>City: <%= comedian.hometown %></p>
     <% if comedian.specials %>
-    <li> <%= comedian.specials.count%> </li>
-      <% comedian.specials.each do |special| %>
-        <span>
-          <img src='<%=special.image%>' alt='<%=special.name%>' >
-          <div class="details">
-            <p class="Title"><%=special.name%></p>
-            <p class="runtime"><%=special.runtime%> minutes</p>
-          </div>
-        </span>
-      <% end %>
+      <p>Total Specials: <%= comedian.specials.count%> </p>
+      <span class='specials'>
+        <% comedian.specials.each do |special| %>
+          <span class='special'>
+            <img src='<%=special.image%>' alt='<%=special.name%>'>
+            <span class="details">
+              <p class="Title"><%=special.name%></p>
+              <p class="runtime">Length: <%=special.runtime%> minutes</p>
+            </span>
+          </span>
+        <% end %>
+      </span>
     <%end%>
-  </ul>
 </span>
 <%end%>
