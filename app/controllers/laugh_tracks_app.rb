@@ -9,5 +9,11 @@ class LaughTracksApp < Sinatra::Base
                   specials: specials }
   end
 
+  get '/comedians.new' do
+    erb :"comedians/new"
+
+  end
+
+
 
 end

@@ -28,6 +28,17 @@ RSpec.describe Comedian do
         @comic2 = Comedian.create(name: 'Two',   age: 34, hometown:@city2)
         @comic3 = Comedian.create(name: 'Three', age: 20, hometown:@city2)
         @comic4 = Comedian.create(name: 'Four',  age: 20, hometown:@city2)
+
+        @special1 = Special.create(name: "something",       runtime:10, image: "path1")
+        @special2 = Special.create(name: "something else",  runtime:20, image: "path2")
+        @special3 = Special.create(name: "some thing",      runtime:30, image: "path3")
+        @special4 = Special.create(name: "some thing else", runtime:40, image: "path4")
+
+        @comic1.specials << @special1
+        @comic1.specials << @special2
+
+        @comic3.specials << @special3
+        @comic3.specials << @special4
       end
 
       describe 'Assess Query Parameters' do
@@ -80,12 +91,37 @@ RSpec.describe Comedian do
         expect(cities.include?(@city2)).to eq(true)
       end
 
+
       describe 'should interact with specials through Comedian' do
 
-        # it 'should '
+        it 'should return all specials when not filtered' do
+          no_params = {}
+          specials = Comedian.find_specials(no_params)
+          expect(specials.count).to eq(4)
+          included1 = specials.include?(@special1)
+          included2 = specials.include?(@special2)
+          included3 = specials.include?(@special3)
+          included4 = specials.include?(@special4)
+          expect(included1).to eq(true)
+          expect(included2).to eq(true)
+          expect(included3).to eq(true)
+          expect(included4).to eq(true)
+        end
 
+        it 'should return only the relevant specials when filtered' do
+          age_filtered = {age: @comic3.age}
+          specials = Comedian.find_specials(age_filtered)
+          expect(specials.count).to eq(2)
+          included1 = specials.include?(@special1)
+          included2 = specials.include?(@special2)
+          included3 = specials.include?(@special3)
+          included4 = specials.include?(@special4)
+          expect(included1).to eq(false)
+          expect(included2).to eq(false)
+          expect(included3).to eq(true)
+          expect(included4).to eq(true)
+        end
       end
-
 
 
       describe 'Filter' do
@@ -96,11 +132,8 @@ RSpec.describe Comedian do
           list = Comedian.filter_by_age(age)
           expect(list).to eq(expected)
         end
-
       end
-
 
     end
   end
-
 end
