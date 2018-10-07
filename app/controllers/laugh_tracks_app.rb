@@ -21,17 +21,18 @@ class LaughTracksApp < Sinatra::Base
 
   post '/comedians' do
     comedian = Comedian.create(params[:comedian])
-    redirect "comedians/#{comedian.id}"
+    # redirect "comedians/#{comedian.id}"
+    redirect "comedians"
   end
 
   # This is broken
-  get "comedians/:id" do
-    comedians = Comedian.find(params[:id])
-    specials  = comedian.find_specials
-    # erb :"comedians/comedian",
-    erb :"comedians/index",
-        locals: { comedian: comedians,
-                  specials: specials  }
-  end
+  # get "comedians/:id" do
+  #   comedians = Comedian.find(params[:id])
+  #   specials  = comedian.find_specials
+  #   # erb :"comedians/comedian",
+  #   erb :"comedians/index",
+  #       locals: { comedian: comedians,
+  #                 specials: specials  }
+  # end
 
 end
