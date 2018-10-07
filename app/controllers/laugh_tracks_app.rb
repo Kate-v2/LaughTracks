@@ -1,6 +1,22 @@
 
 class LaughTracksApp < Sinatra::Base
 
+  get '/' do
+    erb :welcome
+  end
+
+  post '/' do
+    # http://localhost:9393/?comedian%5Bname%5D=Chris+Rock
+    # http://localhost:9393/?name=Chris+Rock
+    name = (params[:name]).gsub!("+", " ")
+    # comedian = Comedian.find(name: name)
+    comedian = Comedian.find(name: name)
+    # comedian = Comedian.where(name: name)
+    # comedian = Comedian.find(params[:id])
+    # binding.pry
+    redirect 'comedians/#{comedian.id}'
+  end
+
   get '/comedians' do
     comedians = Comedian.assess_params(params)
     specials  = comedians.find_specials
