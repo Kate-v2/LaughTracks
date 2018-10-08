@@ -23,7 +23,7 @@ RSpec.describe 'Viewing Make New Comedian' do
     fill_in('form-name',     with: "Someone")
     fill_in('form-age',      with: "100")
     fill_in('form-hometown', with: "NYC")
-    click_button('new-comedian')
+    click_button('submit-button')
     expect(current_path).to eq('/comedians')
 
     comedian = Comedian.find_by_name("Someone")

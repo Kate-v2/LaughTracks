@@ -16,7 +16,7 @@ class LaughTracksApp < Sinatra::Base
   end
 
   get '/comedians/new' do
-    erb :"comedians/new"
+    erb :"comedians/new", :layout => :layout
   end
 
   post '/comedians' do

@@ -1,0 +1,200 @@
+body {
+  background-image: url(https://www.freegreatpicture.com/files/photo65/32215-stage-background.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-color: black;
+  font-family: sans-serif;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 230%;
+}
+
+h2 {
+  color: black;
+  text-align: center;
+  font-size: 140%;
+}
+
+h3 {
+  color: black;
+  text-align: center;
+  font-size: 90%;
+}
+
+.container {
+  background-color: #F2FCFB;
+  border: 3px solid black;
+}
+
+
+/* --- Statistics ---  */
+
+#stats {
+  width: 80%;
+  height: auto;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 7%;
+}
+
+#stat-title {
+  padding-top: 2%;
+  padding-bottom: 0%;
+  margin-bottom: 0%;
+}
+
+#see-all {
+  min-width: 100%;
+  font-size: 15%;
+  text-align: center;
+  display: inline-block;
+}
+
+
+#stats-container {
+  width: 94%;
+  text-align: center;
+  padding-left: 3%;
+  padding-right: 3%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.stats {
+  padding: 2%;
+  min-width: 15%;
+  max-width: 45%;
+  display: block;
+  justify-content: center;
+}
+
+#cities {
+  width: 60%;
+  text-align: center;
+  justify-content: center;
+}
+
+#cities > p {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: space-between;
+  justify-content: left;
+}
+
+.city {
+  font-size: 10%;
+  width: 18%;
+  padding: 3%;
+  display: flex;
+}
+
+
+/* --- Comedians ---  */
+
+#comedians {
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.comedian {
+  background-color: #F2FCFB;
+  border: 3px solid black;
+  border-radius: 2%;
+  margin: 2%;
+  font-size: 70%;
+
+  width: 28%;
+  max-height: 10%;
+
+  float: left;
+  align-items: center;
+  text-align: center;
+}
+
+.specials{
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  width: auto;
+}
+
+/* size issue here */
+.special{
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.details {
+  height: 30%;
+  text-align: left;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-style: italic;
+}
+
+img {
+  width: 15%;
+  height: auto;
+  max-height: 250px;
+  max-width:  250px;
+  margin: 2%;
+  display: block;
+  overflow: hidden;
+  clip: auto;
+  object-fit: cover;
+}
+
+/* --- form ---  */
+
+#new {
+  background-color: #F2FCFB;
+  border: 3px solid black;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form p {
+  text-align: right;
+  margin: 2%;
+  display: flex;
+  justify-content: center;
+
+}
+
+form input {
+  margin-left: 5%;
+}
+
+#submit-button {
+  display: block;
+  width: 20%;
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}

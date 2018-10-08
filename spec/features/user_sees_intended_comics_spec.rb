@@ -40,23 +40,23 @@ RSpec.describe 'Viewing Comedians' do
       it 'when all comics are present' do
         visit '/comedians'
         average = ((10 + 20 + 30 + 40) / 4).round(2)
-        expect(page).to have_content("Average TV Special Run Time: #{average}")
+        page.should have_selector('#stats', text: /#{average}/i)
       end
-      it 'when some comics are preset' do
+      it 'when some comics are present' do
         visit '/comedians?age=34'
         average = ((10 + 20) / 2).round(2)
-        expect(page).to have_content("Average TV Special Run Time: #{average}")
+        page.should have_selector('#stats', text: /#{average}/i)
       end
     end
 
     describe 'Count Total Specials of comics on the page' do
       it 'when all comics are present' do
         visit '/comedians'
-        expect(page).to have_content("Total TV Specials: 4")
+        page.should have_selector('#stats', text: /4/i)
       end
-      it 'when some comics are preset' do
+      it 'when some comics are present' do
         visit '/comedians?age=34'
-        expect(page).to have_content("Total TV Specials: 2")
+        page.should have_selector('#stats', text: /2/i)
       end
     end
 
@@ -64,25 +64,25 @@ RSpec.describe 'Viewing Comedians' do
       it 'when all comics are present' do
         visit '/comedians'
         average = ((34 + 34 + 20 + 20) / 4).round
-        expect(page).to have_content("Average Age: #{average}")
+        page.should have_selector('#stats', text: /#{average}/i)
       end
-      it 'when some comics are preset' do
+      it 'when some comics are present' do
         visit '/comedians?age=34'
         average = 34
-        expect(page).to have_content("Average Age: #{average}")
+        page.should have_selector('#stats', text: /#{average}/i)
       end
     end
 
     describe 'Display unique cities of comics on the page' do
       it 'when all comics are present' do
         visit '/comedians'
-        expect(page).to have_content("Cities: #{@city2} #{@city1}")
+        page.should have_selector('#stats', text: /#{@city2} #{@city1}/i)
       end
       it 'when some comics are present' do
         visit '/comedians?age=20'
-        expect(page).to_not have_content("Cities: #{@city2} #{@city1}")
-        expect(page).to have_content("Cities: #{@city2}")
-        expect(page).to_not have_content("#{@city1}")
+        page.should_not have_selector('#stats', text: /#{@city2} #{@city1}/i)
+        page.should have_selector('#stats', text: /#{@city2}/i)
+        page.should_not have_selector('#stats', text: /#{@city1}/i)
       end
     end
   end
