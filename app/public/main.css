@@ -46,7 +46,16 @@ h3 {
 
 #stat-title {
   padding-top: 2%;
+  padding-bottom: 0%;
 }
+
+#see-all {
+  min-width: 100%;
+  font-size: 15%;
+  text-align: center;
+  display: inline-block;
+}
+
 
 #stats-container {
   width: 94%;

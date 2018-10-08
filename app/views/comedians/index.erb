@@ -3,6 +3,9 @@
 
 <div id="stats" class="container">
   <h2 id='stat-title'>Statistics</h2>
+  <% if comedians.count < Comedian.all.count %>
+    <div><a id='see-all' href='/comedians'>see all comedians</a></div>
+  <% end %>
   <div id="stats-container">
     <div id="average_length" class="stats">
       <h3>Average TV Special Run Time </h3>
