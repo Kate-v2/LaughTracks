@@ -1,31 +1,33 @@
 
 <div id="title"> <h1>Comedians</h1> </div>
 
-<div id="stats">
+<div id="stats" class="container">
   <h2 id='stat-title'>Statistics</h2>
   <div id="stats-container">
-    <span id="average_length" class="stats">
+    <div id="average_length" class="stats">
       <h3>Average TV Special Run Time </h3>
       <p><%=specials.average_length.round(2)%> minutes<p>
-    </span>
-    <span id="total_specials" class="stats">
+    </div>
+    <div id="total_specials" class="stats">
       <h3>Total TV Specials</h3>
       <p><%=comedians.total_specials(params)%><p>
-      </span>
-    <span id="average_age" class="stats">
+      </div>
+    <div id="average_age" class="stats">
       <h3>Average Age</h3>
       <p><%=comedians.average_age(params).round%> years old</p>
-    </span>
-    <span id="Unique_cities" class="stats">
+    </div>
+    <div id="cities" class="stats">
       <h3>Cities</h3>
-      <p><% comedians.cities(params).each do |city| %>
-        <span class="city"><%= city %> <%end%></span>
+      <p>
+        <% comedians.cities(params).each do |city| %>
+          <span class="city"><%= city %> </span>
+        <%end%>
       </p>
-    </span>
+    </div>
   </div>
 </div>
 
-<div id="comedians">
+<div id="comedians" clas='container'>
   <% comedians.each do |comedian| %>
   <span class="comedian" id='<%=comedian.id%>'>
     <h2><%= comedian.name %></h2>
