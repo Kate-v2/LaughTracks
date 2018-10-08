@@ -1,0 +1,101 @@
+body {
+  background-image: url(https://www.freegreatpicture.com/files/photo65/32215-stage-background.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: black;
+  font-family: sans-serif;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 300%;
+}
+
+h2 {
+  color: black;
+  text-align: center;
+}
+
+#stats {
+  background-color: #F2FCFB;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+#stat-title {
+  padding-top: 2%;
+}
+
+.stats {
+  height: 50%;
+  max-width: 15%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Unique_cities {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.city {
+  margin: 1.5%;
+  font-size: 10%;
+  display: flex;
+}
+
+#stats-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#comedians {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.comedian {
+  float: left;
+  background-color: #F2FCFB;
+  border-radius: 2%;
+  margin: 2%;
+  width: 28%;
+  max-height: 20%;
+  text-align: center;
+}
+
+.specials{
+  display: flex;
+  flex-direction: column;
+}
+
+.special{
+  display: flex;
+  flex-direction: row;
+}
+
+.details {
+  text-align: left;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-style: italic;
+}
+
+img {
+  margin: 2%;
+  max-height: 150px;
+}

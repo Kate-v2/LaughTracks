@@ -2,35 +2,49 @@
 <div id="title"> <h1>Comedians</h1> </div>
 
 <div id="stats">
-  <h2>Statistics</h2>
-  <p id="average_length">Average TV Special Run Time: <%=specials.average_length.round(2)%> minutes</p>
-  <p id="total_specials">Total TV Specials: <%=comedians.total_specials(params)%></p>
-  <p id="average_age">Average Age: <%=comedians.average_age(params).round%> years old</p>
-  <p id="Unique_cities">Cities:
-    <% comedians.cities(params).each do |city| %>
-      <span class="city"><%= city %> <%end%></span>
-  </p>
+  <h2 id='stat-title'>Statistics</h2>
+  <div id="stats-container">
+    <span id="average_length" class="stats">
+      <h3>Average TV Special Run Time </h3>
+      <p><%=specials.average_length.round(2)%> minutes<p>
+    </span>
+    <span id="total_specials" class="stats">
+      <h3>Total TV Specials</h3>
+      <p><%=comedians.total_specials(params)%><p>
+      </span>
+    <span id="average_age" class="stats">
+      <h3>Average Age</h3>
+      <p><%=comedians.average_age(params).round%> years old</p>
+    </span>
+    <span id="Unique_cities" class="stats">
+      <h3>Cities</h3>
+      <p><% comedians.cities(params).each do |city| %>
+        <span class="city"><%= city %> <%end%></span>
+      </p>
+    </span>
+  </div>
 </div>
 
-
-<% comedians.each do |comedian| %>
-<span class="comedian" id='<%=comedian.id%>'>
-  <h2><%= comedian.name %></h2>
-    <p>Age: <%= comedian.age %></p>
-    <p>City: <%= comedian.hometown %></p>
-    <% if comedian.specials %>
+<div id="comedians">
+  <% comedians.each do |comedian| %>
+  <span class="comedian" id='<%=comedian.id%>'>
+    <h2><%= comedian.name %></h2>
+      <p>Age: <%= comedian.age %></p>
+      <p>City: <%= comedian.hometown %></p>
       <p>Total Specials: <%= comedian.specials.count%> </p>
-      <span class='specials'>
-        <% comedian.specials.each do |special| %>
-          <span class='special'>
-            <img src='<%=special.image%>' alt='<%=special.name%>'>
-            <span class="details">
-              <p class="Title"><%=special.name%></p>
-              <p class="runtime">Length: <%=special.runtime%> minutes</p>
+      <% if comedian.specials %>
+        <span class='specials'>
+          <% comedian.specials.each do |special| %>
+            <span class='special'>
+              <img src='<%=special.image%>' alt='<%=special.name%>'>
+              <span class="details">
+                <p class="title"><%=special.name%></p>
+                <p class="runtime">Length: <%=special.runtime%> minutes</p>
+              </span>
             </span>
-          </span>
-        <% end %>
-      </span>
-    <%end%>
-</span>
-<%end%>
+          <% end %>
+        </span>
+      <%end%>
+  </span>
+  <%end%>
+</div>
